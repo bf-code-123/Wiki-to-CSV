@@ -1,14 +1,9 @@
-import csv
-from tokenize import Name
+import requests #to manipulate web page
+from bs4 import BeautifulSoup #to manipulate html
+import pandas as pd #data analysis
 
-file = open("phonebook.csv", "a")
+wiki_url = "https://en.wikipedia.org/wiki/Academy_Award_for_Best_Picture#2010s"
+response = requests.get(wiki_url)
 
-name = input("Name: ")
-print(name)
-number = input("Number: ")
-print(number)
-
-writer = csv.writer(file)
-writer.writerow([name, number])
-
-file.close()
+test_soup = BeautifulSoup(response.text,'html.parset')
+movie_list = test_soup.find('table')
